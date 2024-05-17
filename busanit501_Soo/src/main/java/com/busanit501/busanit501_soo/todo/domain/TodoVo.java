@@ -1,4 +1,4 @@
-package domain;
+package com.busanit501.busanit501_soo.todo.domain;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Builder
 @ToString
 @NoArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @AllArgsConstructor
 public class TodoVo {
     private Long tno;

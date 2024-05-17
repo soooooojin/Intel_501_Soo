@@ -44,6 +44,11 @@ dependencies {
     // test, 단위 테스트에서도, 사용하기.
     testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
     testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
+
+    //hikari CP설치
+    // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.1.0'
+
 }
 
 test {
