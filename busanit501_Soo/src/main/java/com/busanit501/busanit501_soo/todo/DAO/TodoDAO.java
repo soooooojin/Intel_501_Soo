@@ -13,7 +13,7 @@ import java.util.List;
 public class TodoDAO {
 
     //조희 select
-    public List<TodoVo> selectAll() throws Exception{
+    public List<TodoVo> selectAll() throws Exception {
         //예외처리 여부를 throws 진행하기.
         //디비 연결하는 순서
         //1) 연결 하는 도구 Connection 타입의 인스턴스 필요
@@ -27,8 +27,8 @@ public class TodoDAO {
         @Cleanup ResultSet rs = pstmt.executeQuery();
         //디비에서 조회한 데이터 내용들을 담을 임시 List가 필요함. 여기에 담을 예정
         List<TodoVo> samples = new ArrayList<TodoVo>();
-        
-        while (rs.next()){
+
+        while (rs.next()) {
             // 기존에는 , set 를 이용해서 담는 방법
 //      // 임시 TodoVo에 담기, -> 다시 임시 목록에 담기.
 //      // 방법1
@@ -50,11 +50,38 @@ public class TodoDAO {
                     .build();
             // 리스트에 담기.
             samples.add(todoVoBuilder);
-            
+
         }
         //임시 반환값
         return samples;
     }
+
+    // 하나의 todo 조회하기 . 상세보기
+    public TodoVo selectOne(Long tno) throws Exception {
+        String sql = "select * from  tbl_todo where tno = ?";
+        //1)
+        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+        //화면에서 특정 게시글 선택하면,
+        //get : URL : http://localhost:8080/todo/read?tno=3
+        pstmt.setLong(1, tno);
+        @Cleanup ResultSet rs = pstmt.executeQuery();
+        //값이 하나여서 반목문이 필요없음
+        rs.next();
+        //임시로 담을 인스턴스 .Builder 패턴 이용해보기
+
+        TodoVo todoVo = TodoVo.builder()
+                .tno(rs.getLong("tno"))
+                .title(rs.getString("title"))
+                .dueDate(rs.getDate("DueDate").toLocalDate())
+                .finished(rs.getBoolean("finished"))
+                .build();
+        //임시 인스턴스
+        return new TodoVo();
+
+    }
+
+
 
     //쓰기 insert
 

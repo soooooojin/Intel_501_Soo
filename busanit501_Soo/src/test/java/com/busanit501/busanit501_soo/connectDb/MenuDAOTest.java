@@ -45,12 +45,21 @@ public class MenuDAOTest {
         samples.forEach(vo ->System.out.println("각각 출력해보기 : " + vo) );
     }
 
+
     @Test
     public void SelectAllTest() throws Exception {
         List<MenuVo> samples = menuDAO.selectAll();
 
         System.out.println("samples : " + samples);
         samples.forEach(vo ->System.out.println("각각 출력해보기 : " + vo) );
+
+    }
+
+    @Test
+    public void getSelectOne() throws Exception {
+        TodoVo todoVo = todoDAO.selectOne(5L);
+        // 기본 출력이고, 전체 출력
+        System.out.println("todoVO : " + todoVo);
 
     }
 }
