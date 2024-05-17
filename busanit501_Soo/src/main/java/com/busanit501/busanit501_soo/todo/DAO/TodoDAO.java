@@ -17,7 +17,7 @@ public class TodoDAO {
         //예외처리 여부를 throws 진행하기.
         //디비 연결하는 순서
         //1) 연결 하는 도구 Connection 타입의 인스턴스 필요
-        //2) SQL 전달하는 도구 : PreparedStatement타입의 인스터스 필요
+        //2) SQL 전달하는 도구 : PreparedStatement타입의 인스턴스 필요
         //3) select 힐때는 조회결과를 받기 위한 ResultSet 타입의 인스터스 필요
         // 작업 후 , 반납 -> @Cleanup 사용할 예정
         String sql = "select * from  tbl_todo";
@@ -30,26 +30,26 @@ public class TodoDAO {
         
         while (rs.next()){
             // 기존에는 , set 를 이용해서 담는 방법
-//      // 임시 TodoVO에 담기, -> 다시 임시 목록에 담기.
+//      // 임시 TodoVo에 담기, -> 다시 임시 목록에 담기.
 //      // 방법1
-//      TodoVO todoVO = new TodoVO();
+//      TodoVo todoVo = new TodoVo();
 //      // resultSet.getLong("tno"), 디비에서 조회한 내용.
-//      todoVO.setTno(resultSet.getLong("tno"));
-//      todoVO.setTitle(resultSet.getString("title"));
-//      todoVO.setDueDate(resultSet.getDate("dueDate").toLocalDate());
-//      todoVO.setFinished(resultSet.getBoolean("finished"));
+//      todoVo.setTno(resultSet.getLong("tno"));
+//      todoVo.setTitle(resultSet.getString("title"));
+//      todoVo.setDueDate(resultSet.getDate("dueDate").toLocalDate());
+//      todoVo.setFinished(resultSet.getBoolean("finished"));
 //      // 리스트에 담기.
-//      samples.add(todoVO);
+//      samples.add(todoVo);
             // builder 패턴으로 담는 방법.
             // 방법2
-            TodoVo todoVOBuilder = TodoVo.builder()
+            TodoVo todoVoBuilder = TodoVo.builder()
                     .tno(rs.getLong("tno"))
                     .title(rs.getString("title"))
                     .dueDate(rs.getDate("dueDate").toLocalDate())
                     .finished(rs.getBoolean("finished"))
                     .build();
             // 리스트에 담기.
-            samples.add(todoVOBuilder);
+            samples.add(todoVoBuilder);
             
         }
         //임시 반환값
@@ -57,6 +57,8 @@ public class TodoDAO {
     }
 
     //쓰기 insert
+
+
 
     //수정 update
 
