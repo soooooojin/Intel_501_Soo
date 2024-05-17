@@ -26,6 +26,24 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    // JSTL
+    // 설정후, 오른쪽 상단 , 코끼리 싱크 버튼 클릭 해서 , 적용하기.
+    // 주소 변경,
+    implementation group: 'jstl', name: 'jstl', version: '1.2'
+
+    // 마리아 db 드라이버 설치.
+    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.3.3'
+
+    //롬복 라이브러리 설치
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
+
+    // test, 단위 테스트에서도, 사용하기.
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
+    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
 }
 
 test {
