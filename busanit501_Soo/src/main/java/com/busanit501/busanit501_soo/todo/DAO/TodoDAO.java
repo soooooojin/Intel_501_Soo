@@ -1,10 +1,81 @@
 package com.busanit501.busanit501_soo.todo.DAO;
 
+import com.busanit501.busanit501_soo.todo.domain.TodoVo;
+import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
+import lombok.Cleanup;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TodoDAO {
+
+    //조희 select
+    public List<TodoVo> selectAll() throws Exception{
+        //예외처리 여부를 throws 진행하기.
+        //디비 연결하는 순서
+        //1) 연결 하는 도구 Connection 타입의 인스턴스 필요
+        //2) SQL 전달하는 도구 : PreparedStatement타입의 인스터스 필요
+        //3) select 힐때는 조회결과를 받기 위한 ResultSet 타입의 인스터스 필요
+        // 작업 후 , 반납 -> @Cleanup 사용할 예정
+        String sql = "select * from  tbl_todo";
+        //1)
+        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+        @Cleanup ResultSet rs = pstmt.executeQuery();
+        //디비에서 조회한 데이터 내용들을 담을 임시 List가 필요함. 여기에 담을 예정
+        List<TodoVo> samples = new ArrayList<TodoVo>();
+        
+        while (rs.next()){
+            // 기존에는 , set 를 이용해서 담는 방법
+//      // 임시 TodoVO에 담기, -> 다시 임시 목록에 담기.
+//      // 방법1
+//      TodoVO todoVO = new TodoVO();
+//      // resultSet.getLong("tno"), 디비에서 조회한 내용.
+//      todoVO.setTno(resultSet.getLong("tno"));
+//      todoVO.setTitle(resultSet.getString("title"));
+//      todoVO.setDueDate(resultSet.getDate("dueDate").toLocalDate());
+//      todoVO.setFinished(resultSet.getBoolean("finished"));
+//      // 리스트에 담기.
+//      samples.add(todoVO);
+            // builder 패턴으로 담는 방법.
+            // 방법2
+            TodoVo todoVOBuilder = TodoVo.builder()
+                    .tno(rs.getLong("tno"))
+                    .title(rs.getString("title"))
+                    .dueDate(rs.getDate("dueDate").toLocalDate())
+                    .finished(rs.getBoolean("finished"))
+                    .build();
+            // 리스트에 담기.
+            samples.add(todoVOBuilder);
+            
+        }
+        //임시 반환값
+        return samples;
+    }
+
+    //쓰기 insert
+
+    //수정 update
+
+    //삭제 delete
+
+
+    public String getTime2() throws Exception{
+        //자원 반납 자동으로 처리해보기, 롬복의 @cleanup 가능 이용하기.
+        //사용법 : @Cleanup, 자동으로 반납하고 싶은 메서드에 붙이기.
+        @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = connection.prepareStatement("select now()");
+        @Cleanup ResultSet rs = pstmt.executeQuery();
+        rs.next();
+        String now = rs.getString(1);
+            return now;
+            
+    }
+
+
     //데이터베이스 직접적인 비지니스 로직 처리하는 기능 만들기
     //샘플
     //현재 시간을 가져오는 기능.
@@ -39,4 +110,5 @@ public class TodoDAO {
         // try resource , 자동 close 가 포함되어 있다.
         return now;
     }
+
 }
