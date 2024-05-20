@@ -1,4 +1,4 @@
-package com.busanit501.busanit501_soo.todo;
+package com.busanit501.busanit501_soo.todo.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

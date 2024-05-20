@@ -4,6 +4,7 @@ import com.busanit501.busanit501_soo.todo.DAO.TodoDAO;
 import com.busanit501.busanit501_soo.todo.domain.TodoVO;
 import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
 import com.busanit501.busanit501_soo.todo.util.MapperUtil;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Log4j2
 public enum TodoService {
   INSTANCE;
     //준비물), 1) TodoDAO ,인스턴슨 필요
@@ -41,7 +43,10 @@ public enum TodoService {
 //        .dueDate(todoDTO.getDueDate())
 //        .finished(todoDTO.isFinished())
 //        .build();
-        System.out.println("todoVO : "+ todoVO);
+//        System.out.println("todoVO : "+ todoVO);
+
+        log.info("todoDTO : " + todoDTO);
+
         // 실제 디비에도 넣기.
         todoDAO.insert(todoVO);
     }

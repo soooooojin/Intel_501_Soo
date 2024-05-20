@@ -2,12 +2,14 @@ package com.busanit501.busanit501_soo.connectDb.service;
 
 import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
 import com.busanit501.busanit501_soo.todo.service.TodoService;
+import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import java.time.LocalDate;
 
+@Log4j2
 public class serviceTest {
     //  다른 클래스의 인스턴스가 필요해요. -> 주입, 포함
     private TodoService todoService;
@@ -26,6 +28,7 @@ public class serviceTest {
                 .dueDate(LocalDate.now())
                 .finished(false)
                 .build();
+        log.info("todoDTO : " + todoDTO);
 
         // 인자 값으로 TodoDTO 를 사용해야함.
         todoService.register2(todoDTO);
