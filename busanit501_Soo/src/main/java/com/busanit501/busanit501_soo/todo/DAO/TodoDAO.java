@@ -5,6 +5,7 @@ import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
 import lombok.Cleanup;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -80,16 +81,53 @@ public class TodoDAO {
         return new TodoVo();
 
     }
+ //쓰기 insert
+    // 화면에서 받았다 치고, 현재는 더미로 넣기 연습.
+    // 임시로 저장할 모델 DTO -> VO 변환 -> VO 를 해당 데이터베이스 입력.
+    // 현재 단계에서는, DAO는 직접적인 DB에 넣는 타입은 VO 로 진행함.
+public void insert(TodoVo todoVo) throws Exception {
+    String sql = "insert into tbl_todo(title,dueDate,finished) values(?,?,?)";
+    //1) @Cleanup ,자원 반납 자동으로 lombok 라는 도구 이용해서.
+    @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
+    @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+    //화면에서 특정 게시글 선택하면
+    //get : URL: http://localhost:8080/todo/read?tno=3
+    pstmt.setString(1, todoVo.getTitle());
+    //vo.getDueDate() : LocalDate
+    //Date.valueOf 메서드의 결과 타입 Date 로 변환함.
+    pstmt.setDate(2, Date.valueOf(todoVo.getDueDate()));
+    pstmt.setBoolean(3, todoVo.isFinished());
 
-
-
-    //쓰기 insert
-
-
+    // select 조회 할 때, pstmt.executeQuery();
+    // insert, update, delete , executeUpdate();
+    // int result = pstmt.executeUpdate();
+    // return result;
+    pstmt.executeUpdate();
+}
 
     //수정 update
+    // 수정 폼에서, 수정하고 싶은 데이터를 임시 모델에 담기. -> TodoVO todoVo
+public void update(TodoVo todoVo) throws Exception {
+        String sql = "update tbl_todo set finished = ?,title = ? ,dueDate = ?, where tno = ?";
+        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+        //임시 모델에 담겨진 변경할 데이터의 내용을 가져와서 지비에 전달 할 예정
+    pstmt.setBoolean(1, todoVo.isFinished());
+    pstmt.setString(2, todoVo.getTitle());
+    pstmt.setDate(3, Date.valueOf(todoVo.getDueDate()));
+    pstmt.setLong(4, todoVo.getTno());
+    pstmt.executeUpdate();
+}
 
     //삭제 delete
+public void delete(Long tno) throws Exception {
+        String sql = "delete from tbl_todo where tno = ?";
+        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, tno);
+        pstmt.execute();
+}
 
 
     public String getTime2() throws Exception{

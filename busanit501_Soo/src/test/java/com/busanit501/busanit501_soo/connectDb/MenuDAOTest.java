@@ -8,6 +8,7 @@ import com.busanit501.busanit501_soo.todo.todo.domain.TodoVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class MenuDAOTest {
@@ -62,4 +63,40 @@ public class MenuDAOTest {
         System.out.println("todoVO : " + todoVo);
 
     }
+
+    //insert
+
+    @Test
+    public void insert() throws Exception {
+        TodoVo todoVo1 = TodoVo.builder()
+                .title("오늘 점심 뭐먹지?")
+                .dueDate(LocalDate.of(2024,5,20))
+                .finished(false)
+                .build();
+
+        //DAO에서 만들었던 insert 기능 사용하기
+        todoDAO.insert(todoVo1);
+    }
+
+    //update
+    public void update() throws Exception {
+        TodoVo todoVo1 = TodoVo.builder()
+                .tno(2L)
+                .title("오늘 점심 뭐 먹지?")
+                .dueDate(LocalDate.now())
+//      .dueDate(LocalDate.of(2024,5,20))
+                .finished(false)
+                .build();
+
+        //기능 구현
+        todoDAO.update(todoVo1);
+    }
+
+    //delete
+    @Test
+    public void delete() throws Exception {
+        //기능 확인해보기
+        todoDAO.delete(1L);
+    }
+
 }
