@@ -3,8 +3,7 @@ package com.busanit501.busanit501_soo.connectDb;
 import com.busanit501.busanit501_soo.Menu.dao.MenuDAO;
 import com.busanit501.busanit501_soo.Menu.domain.MenuVo;
 import com.busanit501.busanit501_soo.todo.DAO.TodoDAO;
-import com.busanit501.busanit501_soo.todo.domain.TodoVo;
-import com.busanit501.busanit501_soo.todo.todo.domain.TodoVO;
+import com.busanit501.busanit501_soo.todo.domain.TodoVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +37,7 @@ public class MenuDAOTest {
 
     @Test
     public void getSelectAll() throws Exception {
-        List<TodoVo> samples = todoDAO.selectAll();
+        List<TodoVO> samples = todoDAO.selectAll();
         // 기본 출력이고, 전체 출력
         System.out.println("samples : " + samples);
         // 향상된 for, 목록에서 요소를 하나씩 뽑아서 출력함.
@@ -58,7 +57,7 @@ public class MenuDAOTest {
 
     @Test
     public void getSelectOne() throws Exception {
-        TodoVo todoVo = todoDAO.selectOne(5L);
+        TodoVO todoVo = todoDAO.selectOne(5L);
         // 기본 출력이고, 전체 출력
         System.out.println("todoVO : " + todoVo);
 
@@ -68,19 +67,19 @@ public class MenuDAOTest {
 
     @Test
     public void insert() throws Exception {
-        TodoVo todoVo1 = TodoVo.builder()
+        TodoVO todoVO1 = TodoVO.builder()
                 .title("오늘 점심 뭐먹지?")
                 .dueDate(LocalDate.of(2024,5,20))
                 .finished(false)
                 .build();
 
         //DAO에서 만들었던 insert 기능 사용하기
-        todoDAO.insert(todoVo1);
+        todoDAO.insert(todoVO1);
     }
 
     //update
     public void update() throws Exception {
-        TodoVo todoVo1 = TodoVo.builder()
+        TodoVO todoVO1 = TodoVO.builder()
                 .tno(2L)
                 .title("오늘 점심 뭐 먹지?")
                 .dueDate(LocalDate.now())
@@ -89,7 +88,7 @@ public class MenuDAOTest {
                 .build();
 
         //기능 구현
-        todoDAO.update(todoVo1);
+        todoDAO.update(todoVO1);
     }
 
     //delete

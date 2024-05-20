@@ -2,8 +2,6 @@ package com.busanit501.busanit501_soo.connectDb;
 
 import com.busanit501.busanit501_soo.Menu.dao.MenuDAO;
 import com.busanit501.busanit501_soo.Menu.domain.MenuVo;
-import com.busanit501.busanit501_soo.todo.DAO.TodoDAO;
-import com.busanit501.busanit501_soo.todo.domain.TodoVo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

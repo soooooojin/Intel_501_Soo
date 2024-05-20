@@ -1,8 +1,6 @@
 package com.busanit501.busanit501_soo.Menu.dao;
 
 import com.busanit501.busanit501_soo.Menu.domain.MenuVo;
-import com.busanit501.busanit501_soo.todo.domain.TodoVo;
-import com.sun.tools.javac.comp.Todo;
 import lombok.Cleanup;
 
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package com.busanit501.busanit501_soo.todo.todo.service;
+package com.busanit501.busanit501_soo.todo.service;
 
 import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public enum TodoService {
+public enum TodoService_backup {
   INSTANCE;
   //데이터베이스에, crud 작업을 하기위한 도구들의 모음.
   // todo , 작성, 조회, 수정, 삭제 기능들의 모음집.

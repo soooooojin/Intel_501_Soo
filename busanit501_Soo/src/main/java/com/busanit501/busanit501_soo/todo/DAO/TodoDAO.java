@@ -1,7 +1,6 @@
 package com.busanit501.busanit501_soo.todo.DAO;
 
-import com.busanit501.busanit501_soo.todo.domain.TodoVo;
-import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
+import com.busanit501.busanit501_soo.todo.domain.TodoVO;
 import lombok.Cleanup;
 
 import java.sql.Connection;
@@ -14,7 +13,7 @@ import java.util.List;
 public class TodoDAO {
 
     //조희 select
-    public List<TodoVo> selectAll() throws Exception {
+    public List<TodoVO> selectAll() throws Exception {
         //예외처리 여부를 throws 진행하기.
         //디비 연결하는 순서
         //1) 연결 하는 도구 Connection 타입의 인스턴스 필요
@@ -27,7 +26,7 @@ public class TodoDAO {
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
         @Cleanup ResultSet rs = pstmt.executeQuery();
         //디비에서 조회한 데이터 내용들을 담을 임시 List가 필요함. 여기에 담을 예정
-        List<TodoVo> samples = new ArrayList<TodoVo>();
+        List<TodoVO> samples = new ArrayList<TodoVO>();
 
         while (rs.next()) {
             // 기존에는 , set 를 이용해서 담는 방법
@@ -43,14 +42,14 @@ public class TodoDAO {
 //      samples.add(todoVo);
             // builder 패턴으로 담는 방법.
             // 방법2
-            TodoVo todoVoBuilder = TodoVo.builder()
+            TodoVO todoVOBuilder = TodoVO.builder()
                     .tno(rs.getLong("tno"))
                     .title(rs.getString("title"))
                     .dueDate(rs.getDate("dueDate").toLocalDate())
                     .finished(rs.getBoolean("finished"))
                     .build();
             // 리스트에 담기.
-            samples.add(todoVoBuilder);
+            samples.add(todoVOBuilder);
 
         }
         //임시 반환값
@@ -58,7 +57,7 @@ public class TodoDAO {
     }
 
     // 하나의 todo 조회하기 . 상세보기
-    public TodoVo selectOne(Long tno) throws Exception {
+    public TodoVO selectOne(Long tno) throws Exception {
         String sql = "select * from  tbl_todo where tno = ?";
         //1)
         @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
@@ -71,21 +70,21 @@ public class TodoDAO {
         rs.next();
         //임시로 담을 인스턴스 .Builder 패턴 이용해보기
 
-        TodoVo todoVo = TodoVo.builder()
+        TodoVO todoVo = TodoVO.builder()
                 .tno(rs.getLong("tno"))
                 .title(rs.getString("title"))
                 .dueDate(rs.getDate("DueDate").toLocalDate())
                 .finished(rs.getBoolean("finished"))
                 .build();
         //임시 인스턴스
-        return new TodoVo();
+        return new TodoVO();
 
     }
  //쓰기 insert
     // 화면에서 받았다 치고, 현재는 더미로 넣기 연습.
     // 임시로 저장할 모델 DTO -> VO 변환 -> VO 를 해당 데이터베이스 입력.
     // 현재 단계에서는, DAO는 직접적인 DB에 넣는 타입은 VO 로 진행함.
-public void insert(TodoVo todoVo) throws Exception {
+public void insert(TodoVO todoVo) throws Exception {
     String sql = "insert into tbl_todo(title,dueDate,finished) values(?,?,?)";
     //1) @Cleanup ,자원 반납 자동으로 lombok 라는 도구 이용해서.
     @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
@@ -107,7 +106,7 @@ public void insert(TodoVo todoVo) throws Exception {
 
     //수정 update
     // 수정 폼에서, 수정하고 싶은 데이터를 임시 모델에 담기. -> TodoVO todoVo
-public void update(TodoVo todoVo) throws Exception {
+public void update(TodoVO todoVo) throws Exception {
         String sql = "update tbl_todo set finished = ?,title = ? ,dueDate = ?, where tno = ?";
         @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);

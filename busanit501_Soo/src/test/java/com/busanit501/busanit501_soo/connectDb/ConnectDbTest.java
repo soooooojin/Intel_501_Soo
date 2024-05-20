@@ -2,7 +2,7 @@ package com.busanit501.busanit501_soo.connectDb;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import com.busanit501.busanit501_soo.todo.domain.TodoVo;
+import com.busanit501.busanit501_soo.todo.domain.TodoVO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +46,7 @@ public class ConnectDbTest {
     public void test2() {
         //원래 우리가 인스ㅌ너스 생성 방법
         //TodoVo todo = new TodoVo();
-        TodoVo todo = TodoVo.builder()
+        TodoVO todo = TodoVO.builder()
                 .tno(100L)
                 .title("제목100")
                 .dueDate(LocalDate.now())

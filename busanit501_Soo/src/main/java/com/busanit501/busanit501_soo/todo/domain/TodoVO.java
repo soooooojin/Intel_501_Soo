@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 //@RequiredArgsConstructor
 @AllArgsConstructor
-public class TodoVo {
+public class TodoVO {
     private Long tno;
     private String title;
     private LocalDate dueDate;
