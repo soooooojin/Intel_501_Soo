@@ -2,6 +2,7 @@ package com.busanit501.busanit501_soo.todo.controller;
 
 import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
 import com.busanit501.busanit501_soo.todo.service.TodoService;
+import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,25 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+@Log4j2
 @WebServlet(name = "todoList",urlPatterns = "/todo/list")
 public class TodoListController extends HttpServlet {
+
+  //주입, 서비스 인스턴스, 포함
+  private  TodoService todoService = TodoService.INSTANCE;
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    // 목록 화면으로 전달,
-    // 1차, 더미 데이터 10개를 출력해보기.
-    // 마치, 클래스명.특정 변수에 접근.메서드 접근.
-    // 원래, TodoService todoService = new TodoService();
-    // todoService.getList()
-    // static 사용하기. 클래스명.메서드명();
+  //DB에서 전체 목록 가져오기
+  //화면 처리
+    try {
+      //todoService.listAll(); -> 디비에서, 전체 목록 가져오기.
+      List<TodoDTO> sampleList = todoService.listAll();
+      log.info("TodoListController , 확인2, sampleList : " + sampleList);
 
-    List<TodoDTO> sampleList = TodoService.INSTANCE.getList();
-    // 서버가 -> 클라이언트(웹 브라우저)
-    // req 라는 수납 도구에서, 임시 더미 리스트를 담기.
-    // key : list , value : sampleList
-    req.setAttribute("list",sampleList);
-
-    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/todo/todoList.jsp");
-    requestDispatcher.forward(req, resp);
+      // 컨트롤러에서 -> 화면에 -> 데이터 전달
+      req.setAttribute("list",sampleList);
+      req.getRequestDispatcher("/WEB-INF/todo/todoList.jsp")
+              .forward(req, resp);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 }
 

@@ -51,15 +51,39 @@ public enum TodoService {
         todoDAO.insert(todoVO);
     }
     // 전체 조회
+    public List<TodoDTO> listAll() throws Exception {
+        // DB -> DAO -> TodoVO -> TodoDTO , 변환.
+        // DB : 모델 : TodoVO
+        // 화면 : 모델 : TodoDTO
+        List<TodoVO> sampleList = todoDAO.selectAll();
+        log.info("TodoService , 확인1, sampleList : " + sampleList);
+        List<TodoDTO> sampleDtoList = sampleList.stream()
+                .map(vo -> modelMapper.map(vo,TodoDTO.class))
+                .collect(Collectors.toList());
+        return sampleDtoList;
+
+    }
 
 
     // 하나 조회
+public TodoDTO getSelectOne(Long tno) throws Exception {
+        TodoVO sample = todoDAO.selectOne(tno);
+//      log.info("todoService , 확인, sample : " + sample);
+        TodoDTO todoDTO = modelMapper.map(sample,TodoDTO.class);
+        return todoDTO;
+}
 
     // 수정
+    public void updateTodo(TodoDTO todoDTO) throws Exception {
+        TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
+
+        todoDAO.update(todoVO);
+    }
 
     // 삭제
-
-
+    public void deleteTodo(Long tno) throws Exception {
+        todoDAO.delete(tno);
+    }
 
 
     public void register(TodoDTO dto) {

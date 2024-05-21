@@ -50,17 +50,17 @@ public class MenuDAO {
                 .regDate(rs.getDate("MenuRegDate").toLocalDate())
                 .build();
 
-        return new MenuVo();
+        return menuVo;
     }
 
     //쓰기
     public void insert(MenuVo menuVo) throws  Exception{
-        String sql = "insert into lunchmenu(MenuNo,MenuTitle,MenuRegDate) values(?,?,?)";
+        String sql = "insert into lunchmenu(MenuTitle,MenuRegDate) values(?,?)";
+
         @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setLong(1, menuVo.getMenuNo());
-        ps.setString(2, menuVo.getMenuTitle());
-        ps.setDate(3, Date.valueOf(menuVo.getRegDate()));
+        ps.setString(1, menuVo.getMenuTitle());
+        ps.setDate(2, Date.valueOf(menuVo.getRegDate()));
 
         ps.executeUpdate();
     }
