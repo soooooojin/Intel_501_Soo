@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//<DAO = Repository>
 public class MenuDAO {
 
     public List<MenuVo> selectAll() throws  Exception{

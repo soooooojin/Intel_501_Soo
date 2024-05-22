@@ -12,7 +12,11 @@ import java.io.IOException;
 
 @WebServlet(name = "menuDelete", urlPatterns = "/menu/delete")
 public class MenuDeleteController extends HttpServlet {
+
+
     private MenuService menuService = MenuService.INSTANCE;
+
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

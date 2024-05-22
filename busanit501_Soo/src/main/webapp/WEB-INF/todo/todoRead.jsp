@@ -7,6 +7,7 @@
 <body>
 <h1><%= "임시 todoRead 화면." %>
 </h1>
+
 <div>
   <input type="text" name="title" placeholder="제목을 입력해주세요." value="${sample.title}" readonly>
 </div>
@@ -49,4 +50,3 @@
 </script>
 </body>
 </html>
-

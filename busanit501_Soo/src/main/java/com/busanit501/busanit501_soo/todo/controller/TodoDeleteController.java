@@ -12,11 +12,11 @@ import java.io.IOException;
 @WebServlet(name = "todoDelete", urlPatterns = "/todo/delete")
 public class TodoDeleteController extends HttpServlet {
   // 처리
-private TodoService todoService = TodoService.INSTANCE;
+  private TodoService todoService = TodoService.INSTANCE;
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    //삭제 처리하기
+// 삭제 처리하기.
     Long tno = Long.valueOf(req.getParameter("tno"));
     try {
       todoService.deleteTodo(tno);
@@ -28,6 +28,8 @@ private TodoService todoService = TodoService.INSTANCE;
     resp.sendRedirect("/todo/list");
   }
 }
+
+
 
 
 

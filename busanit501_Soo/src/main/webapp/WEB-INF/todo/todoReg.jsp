@@ -5,9 +5,9 @@
   <title>JSP-Model2(MVC)-todoReg</title>
 </head>
 <body>
-<h1><%= "임시 todoReg 화면" %>
+<h1><%= "임시 todoReg 화면." %>
 </h1>
-<form method="post" action="/todo/register">
+<form method="post" action="/todo/register ">
   <div>
     <input type="text" name="title" placeholder="제목을 입력해주세요.">
   </div>

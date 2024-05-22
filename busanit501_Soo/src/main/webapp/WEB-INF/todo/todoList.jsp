@@ -8,6 +8,12 @@
 </head>
 <body>
 <ul>
+  <h1>${mid}님 환영합니다.</h1>
+  <div>
+    <form method="post" action="/logout">
+      <button type="submit">로그아웃</button>
+    </form>
+  </div>
   <button><a href="/todo/register">Todo작성</a></button>
   <%--  서버 컨트롤러에서 전달 받은 박스, 라벨 이름: list, --%>
   <%--  내용물: 디비에서 가져온 10개의 값--%>
@@ -28,5 +34,6 @@
     </li>
   </c:forEach>
 </ul>
+
 </body>
 </html>

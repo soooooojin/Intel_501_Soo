@@ -8,6 +8,8 @@
 <h1><%= "임시 menuRead 화면." %>
 </h1>
 <div>
+<%--  sample = 인스턴스 --%>
+<%--  readonly = 읽기 전용  -> 그래서 read에 있음 --%>
     <input type="text" name="menuTitle" placeholder="제목을 입력해주세요." value="${sample.menuTitle}" readonly>
 </div>
 <div>

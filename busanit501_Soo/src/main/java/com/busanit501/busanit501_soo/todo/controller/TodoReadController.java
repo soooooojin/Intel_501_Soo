@@ -12,14 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Log4j2
+@Log4j2 //로깅 도구
 @WebServlet(name = "todoRead", urlPatterns = "/todo/read")
 public class TodoReadController extends HttpServlet {
   //주입 , 서비스 인스턴스 , 포함.
   private TodoService todoService = TodoService.INSTANCE;
 
   // 게시글 하나의 정보의 창(화면), todo(게시글 한개) 하나의 정보가 필요해요.
-  // todo 할일 목록, 1. 청소하기. 2.설거지하기. 3.분리수거하기. 4. 애들 목욕시키기
+  // todo 할일 목록, 1. 청소하기. 2.설겆이하기. 3.분리수거하기. 4. 애들 목욕시키기
+
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

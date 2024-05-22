@@ -43,10 +43,11 @@ public enum MenuService {
     return sampleDtoList;
   }
 
-  //하나 조회
+  //하나 조회 / 데이터를 가지고 올 때 필요함.
   public MenuDTO getSelectOne(Long menuNo) throws Exception{
     MenuVo sample = menuDAO.selectOne(menuNo);
-//
+//Mapper 해야해서 menuVo로 받고
+    //밑에서 DTO를 Mapper한다.
     MenuDTO menuDTO = modelMapper.map(sample, MenuDTO.class);
     return  menuDTO;
   }
