@@ -8,10 +8,15 @@
 </head>
 <body>
 <ul>
-  <h1>${mid}님 환영합니다.</h1>
+  <h1>${memberDTO.mname}님 환영합니다.</h1>
   <div>
     <form method="post" action="/logout">
       <button type="submit">로그아웃</button>
+    </form>
+  </div>
+  <div>
+    <form method="post" action="/noauto">
+      <button type="submit">자동로그인해제</button>
     </form>
   </div>
   <button><a href="/todo/register">Todo작성</a></button>

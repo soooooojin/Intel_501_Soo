@@ -1,5 +1,6 @@
 package com.busanit501.busanit501_soo.todo.controller;
 
+import com.busanit501.busanit501_soo.todo.dto.MemberDTO;
 import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
 import com.busanit501.busanit501_soo.todo.service.TodoService;
 import lombok.extern.log4j.Log4j2;
@@ -25,9 +26,16 @@ public class TodoListController extends HttpServlet {
     // DB 에서 , 전체 목록을 가져오기.
 
     // 설정한 세션의 정보 가져오기.
+    //값이 문자열 타입
+//    HttpSession session = req.getSession();
+//    String loginInfoSession = (String) session.getAttribute("loginInfo");
+//    log.info("Login info 세션의 정보 get하기.: " + loginInfoSession);
+
+    //방법 2, 값이 인스턴스
     HttpSession session = req.getSession();
-    String loginInfoSession = (String) session.getAttribute("loginInfo");
-    log.info("Login info 세션의 정보 get하기.: " + loginInfoSession);
+    MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
+    log.info("Login info 세션의 정보 get하기.: " + memberDTO);
+
 
     try {
       //todoService.listAll(); -> 디비에서, 전체 목록 가져오기.
@@ -36,7 +44,8 @@ public class TodoListController extends HttpServlet {
 
       // 컨트롤러에서 (서버)-> 화면(jsp)에 -> 데이터 전달
       req.setAttribute("list",sampleList);
-      req.setAttribute("mid",loginInfoSession);
+      req.setAttribute("memberDTO",memberDTO);
+//      req.setAttribute("mid",loginInfoSession);
       req.getRequestDispatcher("/WEB-INF/todo/todoList.jsp")
               .forward(req, resp);
     } catch (Exception e) {

@@ -1,5 +1,7 @@
 package com.busanit501.busanit501_soo.filter;
 
+import com.busanit501.busanit501_soo.Menu.dto.M_MemberDTO;
+import com.busanit501.busanit501_soo.Menu.service.M_MemberService;
 import com.busanit501.busanit501_soo.todo.dto.MemberDTO;
 import com.busanit501.busanit501_soo.todo.service.MemberService;
 import lombok.extern.log4j.Log4j2;
@@ -15,8 +17,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Log4j2
-@WebFilter(urlPatterns = {"/todo/*"})
-public class LoginFilter implements Filter {
+@WebFilter(urlPatterns = {"/Menu/*"})
+public class M_LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -35,8 +37,8 @@ public class LoginFilter implements Filter {
         // 로그인을 해야 -> 세션 생성. -> 필터를 통과해요.
         //
         if (session.getAttribute("loginInfo") != null) {
-//            resp.sendRedirect("/login");
-            //loginInfo
+         //   resp.sendRedirect("/M_login")
+         //   loginInfo
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -47,23 +49,23 @@ public class LoginFilter implements Filter {
 
         //세션에도 없고, 쿠키도 없다면, 그냥 로그인
         if (cookie != null) {
-            resp.sendRedirect("/login");
+            resp.sendRedirect("/M_login");
             return;
         }
         //쿠키가 존재하는 상황
         String uuid = cookie.getValue();
 
         try{
-            MemberDTO memberDTO = MemberService.INSTANCE.selectUUID(uuid);
+            M_MemberDTO M_memberDTO = M_MemberService.INSTANCE.selectUUID(uuid);
 
-            if(memberDTO == null) {
+            if(M_memberDTO == null) {
                 //강제로 예외발생시키기
                 throw new Exception("쿠키 값에 해당하는 유저가 앖다.");
             }
 
             //memberDTO, 회원이 있다면,
             //세션에 저장
-            session.setAttribute("loginInfo", memberDTO);
+            session.setAttribute("loginInfo", M_memberDTO);
             //
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Exception e) {
