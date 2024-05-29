@@ -2,7 +2,6 @@ package com.busanit501.busanit501_soo.todo.DAO;
 
 
 import com.busanit501.busanit501_soo.todo.domain.MemberVO;
-import com.busanit501.busanit501_soo.todo.domain.TodoVO;
 import lombok.Cleanup;
 
 import java.sql.Connection;

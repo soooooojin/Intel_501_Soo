@@ -1,14 +1,20 @@
 package com.busanit501.springex.sample;
 
-
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-@Repository
-//@Primary
-@Qualifier("normal")
-public class SampleDAOImpl implements SampleDAO{
 
+// 같은 애너테이션이 있다면, 하나 선택을 해줌. 우선순위를 높여주는 코드.
+//@Primary
+@Repository
+@Qualifier("normal")
+public class SampleDAOImpl implements SampleDAO {
 
 }
+
+
+
+
+
+
+

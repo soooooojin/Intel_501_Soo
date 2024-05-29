@@ -1,5 +1,6 @@
 package com.busanit501.busanit501_soo.todo.DAO;
 
+
 import com.busanit501.busanit501_soo.todo.domain.TodoVO;
 import lombok.Cleanup;
 
@@ -73,11 +74,11 @@ public class TodoDAO {
         TodoVO todoVo = TodoVO.builder()
                 .tno(rs.getLong("tno"))
                 .title(rs.getString("title"))
-                .dueDate(rs.getDate("DueDate").toLocalDate())
+                .dueDate(rs.getDate("dueDate").toLocalDate())
                 .finished(rs.getBoolean("finished"))
                 .build();
         //임시 인스턴스
-        return new TodoVO();
+        return todoVo;
 
     }
  //쓰기 insert

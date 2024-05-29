@@ -3,7 +3,6 @@ package com.busanit501.busanit501_soo.todo.service;
 import com.busanit501.busanit501_soo.todo.DAO.TodoDAO;
 import com.busanit501.busanit501_soo.todo.domain.TodoVO;
 import com.busanit501.busanit501_soo.todo.dto.TodoDTO;
-import com.busanit501.busanit501_soo.todo.util.MapperUtil;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 
