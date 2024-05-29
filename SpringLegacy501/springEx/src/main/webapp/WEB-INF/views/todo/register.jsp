@@ -17,7 +17,7 @@
         <!--      <nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary bg-primary"  data-bs-theme="" >-->
         <!--      <nav class="navbar bg-primary" data-bs-theme="dark">-->
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="/todo/list">목록가기</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -52,41 +52,41 @@
           Featured
         </div>
         <div class="card-body">
-<%--         register.jsp 의 화면을 복붙--%>
-  <form method="post" action="/todo/register">
-    <input type="hidden" name="tno" value="1">
-    <div class="mb-3">
-      <label for="title" class="form-label">제목</label>
-      <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력해주세요.">
-    </div>
-    <div class="mb-3">
-      <label for="dueDate" class="form-label">일정</label>
-      <input type="date" name="dueDate" class="form-control" id="dueDate">
-    </div>
+          <%--         register.jsp 의 화면을 복붙--%>
+          <form method="post" action="/todo/register">
+            <input type="hidden" name="tno" value="1">
+            <div class="mb-3">
+              <label for="title" class="form-label">제목</label>
+              <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력해주세요.">
+            </div>
+            <div class="mb-3">
+              <label for="dueDate" class="form-label">일정</label>
+              <input type="date" name="dueDate" class="form-control" id="dueDate">
+            </div>
 
-    <div class="mb-3">
-      <label for="writer" class="form-label">작성자</label>
-      <input type="text" name="writer" class="form-control" id="writer" placeholder="작성자를 입력해주세요.">
-    </div>
+            <div class="mb-3">
+              <label for="writer" class="form-label">작성자</label>
+              <input type="text" name="writer" class="form-control" id="writer" placeholder="작성자를 입력해주세요.">
+            </div>
 
-    <div class="mb-3">
-      <label class="form-check-label" for="finished">Finished</label>
-      <input type="checkbox" class="form-check-input" id="finished" name="finished">
-    </div>
+            <div class="mb-3">
+              <label class="form-check-label" for="finished">Finished</label>
+              <input type="checkbox" class="form-check-input" id="finished" name="finished">
+            </div>
 
-     <div class="mb-3">
-      <button type="submit" class="btn btn-primary">작성</button>
-      <button type="reset" class="btn btn-danger">초기화</button>
-    </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">작성</button>
+              <button type="reset" class="btn btn-danger">초기화</button>
+            </div>
 
-  </form>
-  <script>
-    const serverValidErrors = {}
-    <c:forEach items = "${errors}" var="error">
-    serverValidErrors['${error.getField()}'] = '${error.defaultMessage}'
-    </c:forEach>
-    console.log(serverValidErrors)
-  </script>
+          </form>
+          <script>
+            const serverValidErrors = {}
+            <c:forEach items = "${errors}" var="error">
+            serverValidErrors['${error.getField()}'] = '${error.defaultMessage}'
+            </c:forEach>
+            console.log(serverValidErrors)
+          </script>
         </div>
       </div>
     </div>
